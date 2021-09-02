@@ -16,6 +16,7 @@ import {
 
 import { Logo } from './../components'
 import firebase from './../config/firebase'
+import { firebaseApp } from '../config/firebase';
 
 
 const validationSchema = yup.object().shape({
@@ -34,8 +35,13 @@ export default function Home() {
     handleSubmit,
     isSubmitting
   } = useFormik({
-    onSubmit: (values, form) => {
-      console.log(values)
+    onSubmit: async (values, form) => {
+      try {
+        const user = await firebaseApp.auth().createUserWithEmailAndPassword(values.email, values.password)
+        console.log(user)
+      } catch (error){
+        console.log('ERROR: ', error)
+      }
     },
     validationSchema,
     initialValues: {
