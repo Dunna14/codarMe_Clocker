@@ -1,4 +1,4 @@
-import Link from 'next/Link'
+import Link from '@chakra-ui/link'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
